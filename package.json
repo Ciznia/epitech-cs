@@ -2,7 +2,11 @@
   "name": "ecsls",
   "displayName": "ECS Language Server",
   "description": "VS Code extension for the ECS Language Server.",
-  "version": "0.0.1",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ciznia/epitech-cs.git"
+  },
   "engines": {
     "vscode": "^1.75.0"
   },
