@@ -5,36 +5,58 @@ import {
   ServerOptions,
 } from "vscode-languageclient/node";
 
-let client: LanguageClient;
+let clients: LanguageClient[] = [];
 
 export function activate(context: vscode.ExtensionContext) {
-  const serverCommand = "ecsls_run";
-  const serverOptions: ServerOptions = {
-    command: serverCommand,
+  // Configure the ECS Language Server (ecsls)
+  const ecslsServerOptions: ServerOptions = {
+    command: "ecsls_run", // Command to start the ECS Language Server
     args: [],
   };
 
-  const clientOptions: LanguageClientOptions = {
-    documentSelector: [{ scheme: "file", language: "c" }],
+  const ecslsClientOptions: LanguageClientOptions = {
+    documentSelector: [{ scheme: "file", language: "c" }], // Target C files
     synchronize: {
       fileEvents: vscode.workspace.createFileSystemWatcher("**/.git"),
     },
   };
 
-  client = new LanguageClient(
+  const ecslsClient = new LanguageClient(
     "ecsls",
     "ECS Language Server",
-    serverOptions,
-    clientOptions
+    ecslsServerOptions,
+    ecslsClientOptions
   );
 
-  // Start the client
-  client.start();
+  // Configure the EHCS Language Server (ehcsls)
+  const ehcslsServerOptions: ServerOptions = {
+    command: "ehcsls_run", // Command to start the EHCS Language Server
+    args: [],
+  };
+
+  const ehcslsClientOptions: LanguageClientOptions = {
+    documentSelector: [{ scheme: "file", language: "cpp" }], // Target C++ files
+    synchronize: {
+      fileEvents: vscode.workspace.createFileSystemWatcher("**/.git"),
+    },
+  };
+
+  const ehcslsClient = new LanguageClient(
+    "ehcsls",
+    "EHCS Language Server",
+    ehcslsServerOptions,
+    ehcslsClientOptions
+  );
+
+  // Start both clients
+  ecslsClient.start();
+  ehcslsClient.start();
+
+  // Store clients in the array for later use
+  clients.push(ecslsClient, ehcslsClient);
 }
 
 export function deactivate(): Thenable<void> | undefined {
-  if (!client) {
-    return undefined;
-  }
-  return client.stop();
+  // Stop all clients during deactivation
+  return Promise.all(clients.map(client => client.stop())).then(() => undefined);
 }
