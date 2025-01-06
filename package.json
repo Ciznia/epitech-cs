@@ -1,21 +1,25 @@
 {
-  "name": "epitech-cs",
-  "displayName": "epitech cs",
-  "description": "LSP for epitech coding style (haskell and C)",
+  "name": "ecsls",
+  "displayName": "ECS Language Server",
+  "description": "VS Code extension for the ECS Language Server.",
   "version": "0.0.1",
   "engines": {
-    "vscode": "^1.96.0"
+    "vscode": "^1.75.0"
   },
-  "categories": [
-    "Other"
+  "activationEvents": [
+    "onLanguage:c"
   ],
-  "activationEvents": [],
-  "main": "./dist/extension.js",
+  "main": "./out/extension.js",
   "contributes": {
-    "commands": [
+    "languages": [
       {
-        "command": "epitech-cs.helloWorld",
-        "title": "Hello World"
+        "id": "c",
+        "extensions": [
+          ".c"
+        ],
+        "aliases": [
+          "C"
+        ]
       }
     ]
   },
@@ -34,16 +38,21 @@
     "test": "vscode-test"
   },
   "devDependencies": {
-    "@types/vscode": "^1.96.0",
     "@types/mocha": "^10.0.10",
     "@types/node": "20.x",
+    "@types/vscode": "^1.75.0",
     "@typescript-eslint/eslint-plugin": "^8.17.0",
     "@typescript-eslint/parser": "^8.17.0",
-    "eslint": "^9.16.0",
-    "esbuild": "^0.24.0",
-    "npm-run-all": "^4.1.5",
-    "typescript": "^5.7.2",
     "@vscode/test-cli": "^0.0.10",
-    "@vscode/test-electron": "^2.4.1"
+    "@vscode/test-electron": "^2.4.1",
+    "esbuild": "^0.24.0",
+    "eslint": "^9.16.0",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^5.7.2"
+  },
+  "dependencies": {
+    "vsce": "^2.15.0",
+    "vscode-languageclient": "^9.0.1"
   }
 }
+
