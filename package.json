@@ -11,8 +11,7 @@
       "vscode": "^1.75.0"
     },
     "activationEvents": [
-      "onLanguage:c",
-      "onLanguage:hs"
+      "onLanguage:c"
     ],
     "main": "./out/extension.js",
     "contributes": {
@@ -24,15 +23,6 @@
           ],
           "aliases": [
             "C"
-          ]
-        },
-        {
-          "id": "hs",
-          "extensions": [
-            ".hs"
-          ],
-          "aliases": [
-            "Haskell"
           ]
         }
       ]

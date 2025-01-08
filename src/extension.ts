@@ -28,32 +28,11 @@ export function activate(context: vscode.ExtensionContext) {
     ecslsClientOptions
   );
 
-  // Configure the EHCS Language Server (ehcsls)
-  const ehcslsServerOptions: ServerOptions = {
-    command: "ehcsls_run", // Command to start the EHCS Language Server
-    args: [],
-  };
-
-  const ehcslsClientOptions: LanguageClientOptions = {
-    documentSelector: [{ scheme: "file", language: "hs" }], // Target h files
-    synchronize: {
-      fileEvents: vscode.workspace.createFileSystemWatcher("**/.git"),
-    },
-  };
-
-  const ehcslsClient = new LanguageClient(
-    "ehcsls",
-    "EHCS Language Server",
-    ehcslsServerOptions,
-    ehcslsClientOptions
-  );
-
   // Start both clients
   ecslsClient.start();
-  ehcslsClient.start();
 
   // Store clients in the array for later use
-  clients.push(ecslsClient, ehcslsClient);
+  clients.push(ecslsClient);
 }
 
 export function deactivate(): Thenable<void> | undefined {
