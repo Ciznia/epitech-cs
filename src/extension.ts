@@ -35,7 +35,7 @@ export function activate(context: vscode.ExtensionContext) {
   };
 
   const ehcslsClientOptions: LanguageClientOptions = {
-    documentSelector: [{ scheme: "file", language: "cpp" }], // Target C++ files
+    documentSelector: [{ scheme: "file", language: "hs" }], // Target h files
     synchronize: {
       fileEvents: vscode.workspace.createFileSystemWatcher("**/.git"),
     },
