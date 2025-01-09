@@ -15,7 +15,11 @@ export function activate(context: vscode.ExtensionContext) {
   };
 
   const ecslsClientOptions: LanguageClientOptions = {
-    documentSelector: [{ scheme: "file", language: "c" }], // Target C files
+    documentSelector: [
+        { scheme: "file", language: "c" },
+        { scheme: "file", language: "mk" },
+        { scheme: "file", language: "Makefile"}
+    ], // Target C files
     synchronize: {
       fileEvents: vscode.workspace.createFileSystemWatcher("**/.git"),
     },
